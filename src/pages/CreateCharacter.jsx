@@ -76,7 +76,7 @@ function CreateCharacter() {
               required
             />
           </div>
-          <div className="gender">
+          {/* <div className="gender">
             <input
               type="radio"
               value="female"
@@ -113,7 +113,7 @@ function CreateCharacter() {
               onChange={(e) => setGender(e.target.value)}
             />
             <label htmlFor="unknownD">unknown</label>
-          </div>
+          </div> */}
           <div>
             <input
               type="url"

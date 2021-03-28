@@ -42,7 +42,7 @@ function App() {
           <Home status={statusFilter} gender={genderFilter} />
         </Route>
         <Route path="/character/:id" component={CharacterInfo} />
-        <Route path="/create_character/:gender?" component={CreateCharacter} />
+        <Route path="/create_character" component={CreateCharacter} />
         <Footer />
       </div>
     </ThemeProvider>
