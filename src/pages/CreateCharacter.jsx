@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getAllCharacters } from '../actions';
+import { getAllCharacters} from '../actions';
 import styled from 'styled-components';
 //Components
 import ShowMyCharacters from '../components/ShowMyCharacters';
@@ -10,7 +10,7 @@ function CreateCharacter() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [url, setUrl] = useState('');
-  const [genderRadion, setGenderRadio] = useState('female');
+  const [gender, setGender] = useState('');
   const [charactersFromStorage, setCharactersFromStorage] = useState([]);
 
   const renderCharacters = (characters) => {
@@ -29,8 +29,7 @@ function CreateCharacter() {
     if (!name && !email && !url) {
       return false;
     }
-    dispatch(getAllCharacters());
-
+    
     let myCharacters = [];
     if (localStorage.getItem('myCharacters')) {
       myCharacters = localStorage.getItem('myCharacters');
@@ -39,7 +38,7 @@ function CreateCharacter() {
     const character = {
       name,
       email,
-      genderRadion,
+      gender,
       url,
     };
     if (myCharacters.find((el) => el.email === character.email)) {
@@ -48,10 +47,6 @@ function CreateCharacter() {
       myCharacters.push(character);
       localStorage.setItem('myCharacters', JSON.stringify(myCharacters));
     }
-    setName('');
-    setEmail('');
-    setUrl('');
-    window.location.reload();
   };
 
   return (
@@ -87,8 +82,8 @@ function CreateCharacter() {
               value="female"
               name="gender"
               id="female"
-              checked={genderRadion === 'female'}
-              onChange={(e) => setGenderRadio(e.target.value)}
+              checked={gender === 'female'}
+              onChange={(e) => setGender(e.target.value)}
             />
             <label htmlFor="female">female</label>
             <input
@@ -96,8 +91,8 @@ function CreateCharacter() {
               value="male"
               name="gender"
               id="male"
-              checked={genderRadion === 'male'}
-              onChange={(e) => setGenderRadio(e.target.value)}
+              checked={gender === 'male'}
+              onChange={(e) => setGender(e.target.value)}
             />
             <label htmlFor="male">male</label>
             <input
@@ -105,8 +100,8 @@ function CreateCharacter() {
               value="genderless"
               name="gender"
               id="genderless"
-              checked={genderRadion === 'genderless'}
-              onChange={(e) => setGenderRadio(e.target.value)}
+              checked={gender === 'genderless'}
+              onChange={(e) => setGender(e.target.value)}
             />
             <label htmlFor="genderless">genderless</label>
             <input
@@ -114,8 +109,8 @@ function CreateCharacter() {
               value="unknown"
               name="gender"
               id="unknownD"
-              checked={genderRadion === 'unknown'}
-              onChange={(e) => setGenderRadio(e.target.value)}
+              checked={gender === 'unknown'}
+              onChange={(e) => setGender(e.target.value)}
             />
             <label htmlFor="unknownD">unknown</label>
           </div>
@@ -128,7 +123,7 @@ function CreateCharacter() {
               required
             />
           </div>
-          <button type="submit" onClick={createCharacter}>
+          <button onClick={createCharacter}>
             Create
           </button>
         </form>
